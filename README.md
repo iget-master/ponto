@@ -44,7 +44,7 @@ Esta tabela deve conter um indice `UNIQUE(user_id, weekday)` para impedir entrad
 
 Ao fazer login, o sistema deve verificar se o Funcionário está entrando para fazer ponto de entrada ou de saída e já exibir o botão correto no centro da tela principal, que deve conter também suas estatísticas. 
 
-**!**O botão de ponto só deve aparecer caso este seja um dia de trabalho do funcionário.
+**Atenção!** O botão de ponto só deve aparecer caso este seja um dia de trabalho do funcionário.
 
 As "batidas de ponto" devem ser armazenadas na tabela relacional `timetables`:
 * `id`
@@ -56,3 +56,11 @@ As "batidas de ponto" devem ser armazenadas na tabela relacional `timetables`:
 
 Esta tabela deve conter um indice `UNIQUE(user_id, date)` para impedir entradas duplicadas.
 As colunas `time_in` e `time_out` podem ser nulas pois esta mesma tabela servirá para justificar faltas, atrasos e saídas antecipadas.
+
+
+Diretivas de desenvolvimento
+=====
+
+* O sistema deve ser baseado em *Laravel 4.2*
+* Todo o seu desenvolvimento deve ser versionado no *GitHub*
+* Sua interface deve seguir o *Google Material Design* e utilizar o *Twitter Bootstrap 3*
