@@ -42,6 +42,10 @@ Esta tabela deve conter um indice `UNIQUE(user_id, weekday)` para impedir entrad
 
 **Ponto**
 
+Ao fazer login, o sistema deve verificar se o Funcionário está entrando para fazer ponto de entrada ou de saída e já exibir o botão correto no centro da tela principal, que deve conter também suas estatísticas. 
+
+**!**O botão de ponto só deve aparecer caso este seja um dia de trabalho do funcionário.
+
 As "batidas de ponto" devem ser armazenadas na tabela relacional `timetables`:
 * `id`
 * `user_id`
