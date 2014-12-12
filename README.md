@@ -23,7 +23,7 @@ O funcionário deve ter os seguintes atributos:
 * Senha
 
 De forma que sua tabela `users` contenha as seguintes colunas:
-* `id`
+* `id` (No formato gerado pelo laravel)
 * `name VARCHAR(255)`
 * `surname VARCHAR(255)`
 * `email VARCHAR(255) UNIQUE`
@@ -31,5 +31,12 @@ De forma que sua tabela `users` contenha as seguintes colunas:
 * `remember_token VARCHAR(100) NULL`
 * `Timestamps Laravel`
 
-Os horários de entrada e saída por dia, devem ser armazenados numa tabela relacional
+Os horários de entrada e saída por dia, devem ser armazenados numa tabela relacional `users_times` contendo as seguintes colunas:
+* `id` (No formato gerado pelo laravel)
+* `user_id` (No formato da `users.id`)
+* `weekday TINYINT` (0=>Domingo, 6=>Sábado)
+* `time_in TIME`
+* `time_out TIME`
+
+Esta tabela deve conter um indice UNIQUE para `user_id` e `weekday` simultaneamente, de forma a impedir entradas duplicadas.
 
