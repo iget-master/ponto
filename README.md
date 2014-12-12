@@ -38,5 +38,17 @@ Os horários de entrada e saída por dia, devem ser armazenados numa tabela rela
 * `time_in TIME`
 * `time_out TIME`
 
-Esta tabela deve conter um indice UNIQUE para `user_id` e `weekday` simultaneamente, de forma a impedir entradas duplicadas.
+Esta tabela deve conter um indice `UNIQUE(user_id, weekday)` para impedir entradas duplicadas.
 
+**Ponto**
+
+As "batidas de ponto" devem ser armazenadas na tabela relacional `timetables`:
+* `id`
+* `user_id`
+* `date DATE`
+* `time_in TIME NULL`
+* `time_out TIME NULL`
+* `justification VARCHAR(255) NULL`
+
+Esta tabela deve conter um indice `UNIQUE(user_id, date)` para impedir entradas duplicadas.
+As colunas `time_in` e `time_out` podem ser nulas pois esta mesma tabela servirá para justificar faltas, atrasos e saídas antecipadas.
