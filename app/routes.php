@@ -11,7 +11,13 @@
 |
 */
 
+/* Session control routes */
+Route::get('/login', array('as' => 'session.create', 'uses' => 'SessionController@create'))->before('guest');
+Route::get('/logout', array('as' => 'session.destroy', 'uses' => 'SessionController@destroy'));
+Route::resource('session', 'SessionController', array('only' => array('store')));
+
+
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('session.login');
 });

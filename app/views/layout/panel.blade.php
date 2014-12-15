@@ -11,7 +11,6 @@
     <!-- CSS are placed here -->
     {{ HTML::style('http://fonts.googleapis.com/css?family=Roboto:300,700,400') }}
     {{ HTML::style('css/bootstrap.css') }}
-    {{ HTML::style('css/bootstrap-theme.css') }}
     {{ HTML::style('css/font-awesome.min.css') }}
     {{ HTML::style('css/app.css') }}
 </head>
