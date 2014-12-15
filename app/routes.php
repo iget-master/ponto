@@ -19,5 +19,5 @@ Route::resource('session', 'SessionController', array('only' => array('store')))
 
 Route::get('/', function()
 {
-	return View::make('session.login');
+	return View::make('dashboard');
 });
