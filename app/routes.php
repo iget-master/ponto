@@ -16,6 +16,9 @@ Route::get('/login', array('as' => 'session.create', 'uses' => 'SessionControlle
 Route::get('/logout', array('as' => 'session.destroy', 'uses' => 'SessionController@destroy'));
 Route::resource('session', 'SessionController', array('only' => array('store')));
 
+/* User resource routes */
+Route::resource('user', "UserController");
+
 
 Route::get('/', function()
 {

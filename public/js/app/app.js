@@ -1,4 +1,18 @@
 +function ($) {
 	'use strict';
 
+	/* Toggler checkbox handler */
+	$(document).on('click', 'input[type="checkbox"][role="toggle"]', function(event) {
+		console.log(event.currentTarget);
+		var $target = $(event.currentTarget);
+
+		if (typeof $target.data('target') !== 'undefined') {
+			if ($target.prop('checked')) {
+				$($target.data('target')).removeClass('hide');
+			} else {
+				$($target.data('target')).addClass('hide');
+			}
+		}
+	})
+
 } (jQuery)
