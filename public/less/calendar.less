@@ -1,16 +1,17 @@
 div.calendar {
-	//width: 210px;
-	background-color: @accent-500;
+	background-color: @md-indigo-a200;
 	display: inline-block;
 	color: white;
 	padding: 5px;
 	cursor: default;
-	box-shadow: 0 5px 10px -5px #999;
+
 	p {
 		&.month {
 			opacity: 1;
 			margin: 0;
 			line-height: 30px;
+			font-size: 18px;
+			font-weight: 100;
 			text-align: center;	
 		}
 	}
@@ -35,7 +36,7 @@ div.calendar {
 			padding: 0;
 			li {
 				opacity: 0.7;
-				font-size: 10px;
+				font-size: 15px;
 				font-weight: 100;
 				line-height: 30px;
 				text-align: center;
@@ -44,6 +45,22 @@ div.calendar {
 				cursor: pointer;
 				&:hover {
 					opacity: 1;
+				}
+				&.danger {
+					background-color: @md-red-700;
+					border-radius: 50%;
+					padding-right: 1px;
+					line-height: 26px;
+					width: 26px;
+					margin: 2px;
+				}
+				&.success {
+					background-color: @md-green-700;
+					border-radius: 50%;
+					padding-right: 1px;
+					line-height: 26px;
+					width: 26px;
+					margin: 2px;
 				}
 			}
 			li.disabled {

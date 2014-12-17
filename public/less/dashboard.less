@@ -1,0 +1,58 @@
+#dashboard {
+	p {
+		margin: 0;
+		&.title {
+			font-size: 20px;
+			font-weight: 300;
+			margin: 0 0 10px;
+		}
+		&.sub-item {
+			margin-left: 10px;
+			font-size: 10px;
+		}
+	}
+
+	div {
+		&.block-row {
+			margin-bottom: 20px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+		&.block	{
+			display: block;
+			float: left;
+			background: @md-indigo-500;
+			height: 70px;
+			width: 120px;
+			margin-right: 20px;
+			cursor: default;
+
+			&:hover {
+				opacity: 0.9;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+
+			p {
+				text-align: center;
+				color: white;
+				margin: 0;
+				&.title {
+					font-size: 35px;
+					line-height: 44px;
+				}
+				&.subtitle {
+					margin-top: 5px;
+					font-size: 10px;
+					font-weight: 300;
+					opacity: 0.7;
+					text-transform: uppercase;
+				}
+
+			}
+		}
+	}
+}

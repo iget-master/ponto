@@ -20,4 +20,4 @@ Route::resource('session', 'SessionController', array('only' => array('store')))
 Route::get('/', function()
 {
 	return View::make('dashboard');
-});
+})->before('auth');
