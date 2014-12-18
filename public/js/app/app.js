@@ -3,7 +3,6 @@
 
 	/* Toggler checkbox handler */
 	$(document).on('click', 'input[type="checkbox"][role="toggle"]', function(event) {
-		console.log(event.currentTarget);
 		var $target = $(event.currentTarget);
 
 		if (typeof $target.data('target') !== 'undefined') {

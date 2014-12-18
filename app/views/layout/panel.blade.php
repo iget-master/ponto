@@ -52,5 +52,6 @@
     {{ HTML::script('js/app/app.js') }}
     {{ HTML::script('js/app/panel.js') }}
     {{ HTML::script('js/bootstrap.min.js') }}
+    @yield('script')
 </body>
 </html>
