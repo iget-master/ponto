@@ -13,7 +13,7 @@ Funcionalidades
 * Relatório de ponto mensal por Funcionário com percentual de presença, dias de faltas e justificativas.
 * Painel de estatísticas para o Funcionário (semelhante ao seu relatório)
 
-**Funcionário**
+**Funcionário** 
 
 O funcionário deve ter os seguintes atributos:
 * Nome
