@@ -6,6 +6,10 @@ class UserController extends \BaseController {
 	public function __construct()
     {
         $this->beforeFilter('auth');
+        Validator::extend('level_check', function($attribute, $value, $parameters)
+		{
+		    return Auth::user()->level >= $value;
+		});
     }
 
 	/**
@@ -45,9 +49,10 @@ class UserController extends \BaseController {
 				'surname' => 'required',
 				'email' => 'required|email|unique:users',
 				'password' => 'required|confirmed|min:6',
-				'level' => 'required|integer'
+				'level' => 'required|integer|level_check'
 			)
 		);
+
 
 		if ($validator->fails())
 		{
@@ -108,7 +113,7 @@ class UserController extends \BaseController {
 				'name' => 'required',
 				'surname' => 'required',
 				'password' => 'confirmed|min:6',
-				'level' => 'required|integer'
+				'level' => 'required|integer|level_check'
 			)
 		);
 
