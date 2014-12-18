@@ -6,78 +6,91 @@
 			
 	{{ Form::model($user, ['method'=>'PATCH', 'route'=>['user.update', $user->id], 'id'=>'user']) }}
 		<div class="row">
-			<div class="col-md-3">
-				<div class="form-group">
-					{{ Form::label('name', 'Nome:') }}
-					{{ Form::text('name', null, array('class' => 'form-control')) }}
-					@if ($errors->has('name'))
-						{{ $errors->first('name') }}	
-					@endif
-				</div>
-			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							{{ Form::label('name', 'Nome:') }}
+							{{ Form::text('name', null, array('class' => 'form-control')) }}
+							@if ($errors->has('name'))
+								{{ $errors->first('name') }}	
+							@endif
+						</div>
+					</div>
 
-			<div class="col-md-3">
-				<div class="form-group">
-					{{ Form::label('surname', 'Sobrenome:') }}
-					{{ Form::text('surname', null, array('class' => 'form-control')) }}
-					@if ($errors->has('surname'))
-						{{ $errors->first('surname') }}	
-					@endif
-				</div>
-			</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							{{ Form::label('surname', 'Sobrenome:') }}
+							{{ Form::text('surname', null, array('class' => 'form-control')) }}
+							@if ($errors->has('surname'))
+								{{ $errors->first('surname') }}	
+							@endif
+						</div>
+					</div>
 
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group">
-					{{ Form::label('email', 'Email:') }}
-					{{ Form::text('email', null, array('class' => 'form-control')) }}
-					@if ($errors->has('email'))
-						{{ $errors->first('email') }}	
-					@endif
 				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					{{ Form::label('level', 'Email:') }}
-					{{ Form::select('level', array('1' => 'Funcionário', '2' => 'Gerente'), null, array('class' => 'form-control')) }}
-					@if ($errors->has('level'))
-						{{ $errors->first('level') }}	
-					@endif
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<div class="checkbox">
-				    <label>
-						<input type="checkbox" role="toggle" data-target="#password-container"> Alterar senha
-				    </label>
-				</div>
-			</div>
-		</div>
-		<div id="password-container" class="hide">
-			<div class="row">
-				<div class="col-md-2">
-					<div class="form-group">
-						{{ Form::label('password', 'Senha:') }}
-						{{ Form::password('password', array('class' => 'form-control')) }}
-						@if ($errors->has('password'))
-							{{ $errors->first('password') }}	
-						@endif
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							{{ Form::label('email', 'Email:') }}
+							{{ Form::text('email', null, array('class' => 'form-control')) }}
+							@if ($errors->has('email'))
+								{{ $errors->first('email') }}	
+							@endif
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							{{ Form::label('level', 'Email:') }}
+							{{ Form::select('level', array('1' => 'Funcionário', '2' => 'Gerente'), null, array('class' => 'form-control')) }}
+							@if ($errors->has('level'))
+								{{ $errors->first('level') }}	
+							@endif
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2">
-					<div class="form-group">
-						{{ Form::label('password_confirmation', 'Confirme a senha:') }}
-						{{ Form::password('password_confirmation', array('class' => 'form-control')) }}
-						@if ($errors->has('password_confirmation'))
-							{{ $errors->first('password_confirmation') }}	
-						@endif
+				<div class="row">
+					<div class="col-md-4">
+						<div class="checkbox">
+						    <label>
+								<input type="checkbox" role="toggle" data-target="#password-container"> Alterar senha
+						    </label>
+						</div>
 					</div>
 				</div>
+				<div id="password-container" class="hide">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								{{ Form::label('password', 'Senha:') }}
+								{{ Form::password('password', array('class' => 'form-control')) }}
+								@if ($errors->has('password'))
+									{{ $errors->first('password') }}	
+								@endif
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								{{ Form::label('password_confirmation', 'Confirme a senha:') }}
+								{{ Form::password('password_confirmation', array('class' => 'form-control')) }}
+								@if ($errors->has('password_confirmation'))
+									{{ $errors->first('password_confirmation') }}	
+								@endif
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+			<div id="user-times" class="col-md-6">
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_0', '1') }} Sábado</label></div> {{Form::text('day_0_time_in')}} {{Form::text('day_0_time_out')}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_1', '1') }} Segunda-feira</label></div> {{Form::text('day_1_time_in')}} {{Form::text('day_1_time_out')}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_2', '1') }} Terça-feira</label></div> {{Form::text('day_2_time_in')}} {{Form::text('day_2_time_out')}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_3', '1') }} Quarta-feira</label></div> {{Form::text('day_3_time_in')}} {{Form::text('day_3_time_out')}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_4', '1') }} Quinta-feira</label></div> {{Form::text('day_4_time_in')}} {{Form::text('day_4_time_out')}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_5', '1') }} Sexta-feira</label></div> {{Form::text('day_5_time_in')}} {{Form::text('day_5_time_out')}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_6', '1') }} Sábado</label></div> {{Form::text('day_6_time_in')}} {{Form::text('day_6_time_out')}} </div>
 			</div>
 		</div>
 	{{ Form::close() }}
