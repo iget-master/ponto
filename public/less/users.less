@@ -1,6 +1,23 @@
 #user-times {
-	.day { 
-		margin-bottom: 0px;
+	div.header {
+		margin: 0 0 5px 50px;
+		span {
+			display: inline-block;
+			font-weight: 700;
+			&.day {
+				width: 100px;
+			}
+			&.time_in {
+				width: 70px;
+				margin-right: 10px;
+			}
+			&.time_out {
+				width: 70px;
+			}
+		}
+	}
+	div.day { 
+		margin: 0 0 0 30px;
 		div.checkbox {
 			width: 120px;
 			display: inline-block;
@@ -9,6 +26,7 @@
 			width: 70px;
 			margin-right: 10px;
 			text-align: center;
+			display: inline-block;
 			&:last-child {
 				margin-right: 0;
 			}
