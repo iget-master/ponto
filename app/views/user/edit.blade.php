@@ -6,7 +6,7 @@
 			
 	{{ Form::model($user, ['method'=>'PATCH', 'route'=>['user.update', $user->id], 'id'=>'user']) }}
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-7">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
@@ -83,19 +83,19 @@
 					</div>
 				</div>				
 			</div>
-			<div id="user-times" class="col-md-6">
+			<div id="user-times" class="col-md-5">
 				<div class="header">
 					<span class="day">Dia</span>
 					<span class="time_in">Entrada</span>
 					<span class="time_out">Saída</span>
 				</div>
-				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_0', '1') }} Sábado</label></div> {{Form::text('day_0_time_in', null, array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_0_time_out', null, array('class' => 'form-control', 'disabled'=>'true'))}} </div>
-				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_1', '1') }} Segunda-feira</label></div> {{Form::text('day_1_time_in', null, array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_1_time_out', null, array('class' => 'form-control', 'disabled'=>'true'))}} </div>
-				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_2', '1') }} Terça-feira</label></div> {{Form::text('day_2_time_in', null, array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_2_time_out', null, array('class' => 'form-control', 'disabled'=>'true'))}} </div>
-				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_3', '1') }} Quarta-feira</label></div> {{Form::text('day_3_time_in', null, array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_3_time_out', null, array('class' => 'form-control', 'disabled'=>'true'))}} </div>
-				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_4', '1') }} Quinta-feira</label></div> {{Form::text('day_4_time_in', null, array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_4_time_out', null, array('class' => 'form-control', 'disabled'=>'true'))}} </div>
-				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_5', '1') }} Sexta-feira</label></div> {{Form::text('day_5_time_in', null, array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_5_time_out', null, array('class' => 'form-control', 'disabled'=>'true'))}} </div>
-				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_6', '1') }} Sábado</label></div> {{Form::text('day_6_time_in', null, array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_6_time_out', null, array('class' => 'form-control', 'disabled'=>'true'))}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_0', '1') }} Domingo</label></div> {{Form::text('day_0_time_in', (isset($day_0_time_in) ? $day_0_time_in : null), array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_0_time_out', (isset($day_0_time_out) ? $day_0_time_out : null), array('class' => 'form-control', 'disabled'=>'true'))}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_1', '1') }} Segunda-feira</label></div> {{Form::text('day_1_time_in', (isset($day_1_time_in) ? $day_1_time_in : null), array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_1_time_out', (isset($day_1_time_out) ? $day_1_time_out : null), array('class' => 'form-control', 'disabled'=>'true'))}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_2', '1') }} Terça-feira</label></div> {{Form::text('day_2_time_in', (isset($day_2_time_in) ? $day_2_time_in : null), array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_2_time_out', (isset($day_2_time_out) ? $day_2_time_out : null), array('class' => 'form-control', 'disabled'=>'true'))}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_3', '1') }} Quarta-feira</label></div> {{Form::text('day_3_time_in', (isset($day_3_time_in) ? $day_3_time_in : null), array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_3_time_out', (isset($day_3_time_out) ? $day_3_time_out : null), array('class' => 'form-control', 'disabled'=>'true'))}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_4', '1') }} Quinta-feira</label></div> {{Form::text('day_4_time_in', (isset($day_4_time_in) ? $day_4_time_in : null), array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_4_time_out', (isset($day_4_time_out) ? $day_4_time_out : null), array('class' => 'form-control', 'disabled'=>'true'))}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_5', '1') }} Sexta-feira</label></div> {{Form::text('day_5_time_in', (isset($day_5_time_in) ? $day_5_time_in : null), array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_5_time_out', (isset($day_5_time_out) ? $day_5_time_out : null), array('class' => 'form-control', 'disabled'=>'true'))}} </div>
+				<div class="day"><div class="checkbox"><label>{{Form::checkbox('day_check_6', '1') }} Sábado</label></div> {{Form::text('day_6_time_in', (isset($day_6_time_in) ? $day_6_time_in : null), array('class' => 'form-control', 'disabled'=>'true'))}} {{Form::text('day_6_time_out', (isset($day_6_time_out) ? $day_6_time_out : null), array('class' => 'form-control', 'disabled'=>'true'))}} </div>
 			</div>
 		</div>
 	{{ Form::close() }}

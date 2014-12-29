@@ -49,7 +49,21 @@ class UserController extends \BaseController {
 				'surname' => 'required',
 				'email' => 'required|email|unique:users',
 				'password' => 'required|confirmed|min:6',
-				'level' => 'required|integer|level_check'
+				'level' => 'required|integer|level_check',
+				'day_0_time_in' => '',
+				'day_0_time_out' => '',
+				'day_1_time_in' => '',
+				'day_1_time_out' => '',
+				'day_2_time_in' => '',
+				'day_2_time_out' => '',
+				'day_3_time_in' => '',
+				'day_3_time_out' => '',
+				'day_4_time_in' => '',
+				'day_4_time_out' => '',
+				'day_5_time_in' => '',
+				'day_5_time_out' => '',
+				'day_6_time_in' => '',
+				'day_6_time_out' => ''
 			)
 		);
 
@@ -68,6 +82,16 @@ class UserController extends \BaseController {
 				'password' => Hash::make(Input::get('password'))
 			)
 		);
+		for($n=0;$n<7;$n++){
+			if(Input::get("day_check_$n") == 1){
+				$weekday = new UsersTimes();
+				$weekday->user_id = $user->id;
+				$weekday->weekday = $n;
+				$weekday->time_in = Input::get("day_".$n."_time_in");
+				$weekday->time_out = Input::get("day_".$n."_time_out");
+				$weekday->save();
+			}
+		}
 
 		return Redirect::route('user.index');
 	}
@@ -93,7 +117,12 @@ class UserController extends \BaseController {
 	public function edit($id)
 	{
 		$user = User::findOrFail($id);
-		return View::make('user.edit')->with('user', $user);
+		$response = View::make('user.edit')->with('user', $user);
+		foreach(UsersTimes::where('user_id',$id)->get() AS $key){
+			$response->with('day_' . $key->weekday . '_time_in', $key->time_in);
+			$response->with('day_' . $key->weekday . '_time_out', $key->time_out);
+		}
+		return $response; 
 	}
 
 
@@ -106,6 +135,7 @@ class UserController extends \BaseController {
 	public function update($id)
 	{
 		$user = User::findOrFail($id);
+		$user_time = UsersTimes::where('user_id',$id);
 
 		$validator = Validator::make(
 			Input::all(), 
@@ -126,6 +156,35 @@ class UserController extends \BaseController {
 		$user->surname = Input::get('surname');
 		$user->level = Input::get('level');
 
+
+		for($n=0;$n<7;$n++){
+			if (Input::get("day_check_$n") == 1) {
+				UsersTimes::where('user_id', $id)->where('weekday', $n)->delete();
+
+				$weekday = new UsersTimes();
+				$weekday->user_id = $id;
+				$weekday->weekday = $n;
+				$weekday->time_in = Input::get("day_".$n."_time_in");
+				$weekday->time_out = Input::get("day_".$n."_time_out");
+				$weekday->save();
+			} else {
+				$weekday = UsersTimes::where('user_id', $id)->where('weekday', $n)->delete();
+			}
+		}
+
+
+				
+/*
+		$user_time->where('weekday', 0)->time_in = Input::get('day_0_time_in');
+			$user_time->where('weekday', 0)->time_out = Input::get('day_0_time_out');
+		
+		$user_time-> = Input::get('day_check_1');
+		$user_time-> = Input::get('day_check_2');
+		$user_time-> = Input::get('day_check_3');
+		$user_time-> = Input::get('day_check_4');
+		$user_time-> = Input::get('day_check_5');
+		$user_time-> = Input::get('day_check_6');
+*/
 		if (strlen(Input::get('password'))) {
 			$user->password = Hash::make(Input::get('password'));
 		}
