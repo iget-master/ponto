@@ -50,20 +50,20 @@ class UserController extends \BaseController {
 				'email' => 'required|email|unique:users',
 				'password' => 'required|confirmed|min:6',
 				'level' => 'required|integer|level_check',
-				'day_0_time_in' => '',
-				'day_0_time_out' => '',
-				'day_1_time_in' => '',
-				'day_1_time_out' => '',
-				'day_2_time_in' => '',
-				'day_2_time_out' => '',
-				'day_3_time_in' => '',
-				'day_3_time_out' => '',
-				'day_4_time_in' => '',
-				'day_4_time_out' => '',
-				'day_5_time_in' => '',
-				'day_5_time_out' => '',
-				'day_6_time_in' => '',
-				'day_6_time_out' => ''
+				'day_0_time_in' => 'timeFormat',
+				'day_0_time_out' => 'timeFormat',
+				'day_1_time_in' => 'timeFormat',
+				'day_1_time_out' => 'timeFormat',
+				'day_2_time_in' => 'timeFormat',
+				'day_2_time_out' => 'timeFormat',
+				'day_3_time_in' => 'timeFormat',
+				'day_3_time_out' => 'timeFormat',
+				'day_4_time_in' => 'timeFormat',
+				'day_4_time_out' => 'timeFormat',
+				'day_5_time_in' => 'timeFormat',
+				'day_5_time_out' => 'timeFormat',
+				'day_6_time_in' => 'timeFormat',
+				'day_6_time_out' => 'timeFormat'
 			)
 		);
 
@@ -134,6 +134,31 @@ class UserController extends \BaseController {
 	 */
 	public function update($id)
 	{
+		$validator = Validator::make(
+			Input::all(), 
+			Array(
+				'day_0_time_in' => 'timeFormat',
+				'day_0_time_out' => 'timeFormat',
+				'day_1_time_in' => 'timeFormat',
+				'day_1_time_out' => 'timeFormat',
+				'day_2_time_in' => 'timeFormat',
+				'day_2_time_out' => 'timeFormat',
+				'day_3_time_in' => 'timeFormat',
+				'day_3_time_out' => 'timeFormat',
+				'day_4_time_in' => 'timeFormat',
+				'day_4_time_out' => 'timeFormat',
+				'day_5_time_in' => 'timeFormat',
+				'day_5_time_out' => 'timeFormat',
+				'day_6_time_in' => 'timeFormat',
+				'day_6_time_out' => 'timeFormat'
+			)
+		);
+
+
+		if ($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
 		$user = User::findOrFail($id);
 		$user_time = UsersTimes::where('user_id',$id);
 
