@@ -5,7 +5,7 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class UsersTimes extends Eloquent implements UserInterface, RemindableInterface {
+class Timetables extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
@@ -14,14 +14,14 @@ class UsersTimes extends Eloquent implements UserInterface, RemindableInterface 
 	 *
 	 * @var string
 	 */
-	protected $table = 'users_times';
+	protected $table = 'timetables';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
-	protected $fillable = array('weekday','time_in','time_out'); 
+	protected $fillable = array('date','time_in','time_out','justification');
 
 	public $timestamps = false;
 
