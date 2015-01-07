@@ -113,6 +113,9 @@
 @stop
 
 @section('toolbar')
-	<a href="/user/create" class="btn btn-round primary" title="Estou entrando"><i class="fa fa-sign-in"></i></a>
-	<a href="/user/create" class="btn btn-round primary" title="Estou saindo"><i class="fa fa-sign-out"></i></a>
+	@if (is_null($timetable = Timetables::getToday()))
+		<a href="/arrival" class="btn btn-round primary" title="Estou entrando"><i class="fa fa-sign-in"></i></a>
+	@elseif (is_null($timetable->time_out))
+		<a href="/departure" class="btn btn-round primary" title="Estou saindo"><i class="fa fa-sign-out"></i></a>
+	@endif
 @stop

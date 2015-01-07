@@ -12,7 +12,7 @@ class CreateTimetablesForeign extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('timetable', function(Blueprint $table)
+		Schema::table('timetables', function(Blueprint $table)
 		{
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 		});
@@ -25,7 +25,7 @@ class CreateTimetablesForeign extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('timetable', function(Blueprint $table)
+		Schema::table('timetables', function(Blueprint $table)
 		{
 			$table->dropForeign('timetables_user_id_foreign');
 		});
