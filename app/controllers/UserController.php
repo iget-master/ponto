@@ -6,10 +6,6 @@ class UserController extends \BaseController {
 	public function __construct()
     {
         $this->beforeFilter('auth');
-        Validator::extend('level_check', function($attribute, $value, $parameters)
-		{
-		    return Auth::user()->level >= $value;
-		});
     }
 
 	/**
