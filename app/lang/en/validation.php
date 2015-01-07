@@ -31,7 +31,7 @@ return array(
 	"confirmed"            => "The :attribute confirmation does not match.",
 	"date"                 => "The :attribute is not a valid date.",
 	"date_format"          => "The :attribute does not match the format :format.",
-	"time_format"          => "<meta http-equiv='refresh' content='3;URL=#' /><div class='has-error col-lg-3'>",
+	"time_format"          => "<div class='has-error col-lg-3'>",
 	"different"            => "The :attribute and :other must be different.",
 	"digits"               => "The :attribute must be :digits digits.",
 	"digits_between"       => "The :attribute must be between :min and :max digits.",

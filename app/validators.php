@@ -34,26 +34,9 @@ Validator::extend('level_check', function($attribute, $value, $parameters)
 */
 
 Validator::extend('TimeFormat', function($attribute, $value, $parameters){
-	if(strpos($value,":") === false){
-		//nao tem ":"
+	if ((!preg_match('/^([0-2]?\d{1}):(\d{2})$/', $value, $results)) || (($results[1] > 23) || ($results[2] > 59))) {
 		return false;
-	} else{
-		//tem ":"
-		if(strlen($value) < 4){
-			//tem menos de 4 caracteres
-			return false;
-		} elseif(strlen($value) > 5){
-			//tem mais de 5 caracteres
-			return false;
-		} else{
-			//tem a quantidade certa de caracteres
-			if(substr_count($value,":") > 1){
-				//aparece ":" mais de 1x
-				return false;
-			} else{
-				//aparece ":" apenas 1x
-				return true;
-			}
-		}
+	} else {
+		return true;
 	}
 });

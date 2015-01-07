@@ -97,14 +97,14 @@
 					</div>
 					
 					@if ($errors->has('day_0_time_in'))
-						{{ $errors->first('day_0_time_in') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
 						{{Form::text('day_0_time_in', (isset($day_0_time_in) ? substr($day_0_time_in,0,-3) : null), array('class' => 'form-control', 'disabled'=>'true'))}}</div> 
 
 					@if ($errors->has('day_0_time_out'))
-						{{ $errors->first('day_0_time_out') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
@@ -117,14 +117,14 @@
 					</div>
 					
 					@if ($errors->has('day_1_time_in'))
-						{{ $errors->first('day_1_time_in') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
 						{{Form::text('day_1_time_in', (isset($day_1_time_in) ? substr($day_1_time_in,0,-3) : null), array('class' => 'form-control', 'disabled'=>'true'))}}</div> 
 
 					@if ($errors->has('day_1_time_out'))
-						{{ $errors->first('day_1_time_out') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
@@ -137,14 +137,14 @@
 					</div>
 					
 					@if ($errors->has('day_2_time_in'))
-						{{ $errors->first('day_2_time_in') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
 						{{Form::text('day_2_time_in', (isset($day_2_time_in) ? substr($day_2_time_in,0,-3) : null), array('class' => 'form-control', 'disabled'=>'true'))}}</div> 
 
 					@if ($errors->has('day_2_time_out'))
-						{{ $errors->first('day_2_time_out') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
@@ -157,14 +157,14 @@
 					</div>
 					
 					@if ($errors->has('day_3_time_in'))
-						{{ $errors->first('day_3_time_in') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
 						{{Form::text('day_3_time_in', (isset($day_3_time_in) ? substr($day_3_time_in,0,-3) : null), array('class' => 'form-control', 'disabled'=>'true'))}}</div> 
 
 					@if ($errors->has('day_3_time_out'))
-						{{ $errors->first('day_3_time_out') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
@@ -177,14 +177,14 @@
 					</div>
 					
 					@if ($errors->has('day_4_time_in'))
-						{{ $errors->first('day_4_time_in') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
 						{{Form::text('day_4_time_in', (isset($day_4_time_in) ? substr($day_4_time_in,0,-3) : null), array('class' => 'form-control', 'disabled'=>'true'))}}</div> 
 
 					@if ($errors->has('day_4_time_out'))
-						{{ $errors->first('day_4_time_out') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
@@ -197,14 +197,14 @@
 					</div>
 					
 					@if ($errors->has('day_5_time_in'))
-						{{ $errors->first('day_5_time_in') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
 						{{Form::text('day_5_time_in', (isset($day_5_time_in) ? substr($day_5_time_in,0,-3) : null), array('class' => 'form-control', 'disabled'=>'true'))}}</div> 
 
 					@if ($errors->has('day_5_time_out'))
-						{{ $errors->first('day_5_time_out') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
@@ -217,14 +217,14 @@
 					</div>
 					
 					@if ($errors->has('day_6_time_in'))
-						{{ $errors->first('day_6_time_in') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
 						{{Form::text('day_6_time_in', (isset($day_6_time_in) ? substr($day_6_time_in,0,-3) : null), array('class' => 'form-control', 'disabled'=>'true'))}}</div> 
 
 					@if ($errors->has('day_6_time_out'))
-						{{ $errors->first('day_6_time_out') }}
+						<div class="col-lg-3 has-error">
 					@else
 						<div class="col-lg-3">
 					@endif
