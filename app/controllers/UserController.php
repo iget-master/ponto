@@ -182,19 +182,6 @@ class UserController extends \BaseController {
 			}
 		}
 
-
-				
-/*
-		$user_time->where('weekday', 0)->time_in = Input::get('day_0_time_in');
-			$user_time->where('weekday', 0)->time_out = Input::get('day_0_time_out');
-		
-		$user_time-> = Input::get('day_check_1');
-		$user_time-> = Input::get('day_check_2');
-		$user_time-> = Input::get('day_check_3');
-		$user_time-> = Input::get('day_check_4');
-		$user_time-> = Input::get('day_check_5');
-		$user_time-> = Input::get('day_check_6');
-*/
 		if (strlen(Input::get('password'))) {
 			$user->password = Hash::make(Input::get('password'));
 		}
@@ -215,7 +202,25 @@ class UserController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$user = User::findOrFail($id);
+		$messages = new MessageBag();
+
+		if (Auth::user()->id == $user->id) {
+			$messages->add('danger', 'Você não pode excluir o próprio usuário.');
+		} else {
+			if (Auth::user()->level >= $user->level) {
+				if ($user->delete()) {
+					$messages->add('success', 'Usuário excluído com sucesso!');
+					return Redirect::route('user.index')->with('messages', $messages);
+				} else {
+					$messages->add('danger', 'Não foi possível excluir usuário!');
+				}
+			} else {
+				$messages->add('danger', 'Você não possui permissão para excluir esse usuário.');
+			}
+		}
+
+		return Redirect::back()->withInput()->with('messages', $messages);
 	}
 
 
