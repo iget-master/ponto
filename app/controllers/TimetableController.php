@@ -18,7 +18,8 @@ class TimetableController extends \BaseController {
     		$timetable->time_in = date('H:i');
     		$timetable->save();
 
-    		$messages->add('success', 'Você entrou!');
+            $time = date('H:i');
+    		$messages->add('success', "Você entrou! (".$time.")");
     	} else {
     		$messages->add('danger', 'Ei! você não pode entrar duas vezes no mesmo dia!');
     	}
@@ -35,7 +36,9 @@ class TimetableController extends \BaseController {
     		if (is_null($timetable->time_out)) {
 	    		$timetable->time_out = date('H:i');
 	    		$timetable->save();
-	    		$messages->add('success', 'Você saiu!');
+
+                $time = date('H:i');
+	    		$messages->add('success', "Você saiu!(".$time.")");
     		} else {
     			$messages->add('danger', 'Ei! Você já saiu hoje!');
     		}
