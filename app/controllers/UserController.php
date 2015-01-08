@@ -15,6 +15,9 @@ class UserController extends \BaseController {
 	 */
 	public function index()
 	{
+		if (!$this->checkPermission(2)) {
+			return Redirect::route('home.dashboard')->with("permission_denied", true);
+		}
 		$users = User::paginate(15);
 		return View::make('user.index')->with('users', $users);
 	}
@@ -27,6 +30,9 @@ class UserController extends \BaseController {
 	 */
 	public function create()
 	{
+		if (!$this->checkPermission(2)) {
+			return Redirect::route('home.dashboard')->with("permission_denied", true);
+		}
 		return View::make('user.create');
 	}
 
@@ -38,6 +44,9 @@ class UserController extends \BaseController {
 	 */
 	public function store()
 	{
+		if (!$this->checkPermission(2)) {
+			return Redirect::route('home.dashboard')->with("permission_denied", true);
+		}
 		$validator = Validator::make(
 			Input::all(), 
 			Array(
@@ -112,6 +121,10 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+		if (!$this->checkPermission(2, $id)) {
+			return Redirect::route('home.dashboard')->with("permission_denied", true);
+		}
+
 		$user = User::findOrFail($id);
 		$response = View::make('user.edit')->with('user', $user);
 		foreach(UsersTimes::where('user_id',$id)->get() AS $key){
@@ -119,6 +132,7 @@ class UserController extends \BaseController {
 			$response->with('day_' . $key->weekday . '_time_out', $key->time_out);
 		}
 		return $response; 
+
 	}
 
 
@@ -130,6 +144,10 @@ class UserController extends \BaseController {
 	 */
 	public function update($id)
 	{
+		if (!$this->checkPermission(2, $id)) {
+			return Redirect::route('home.dashboard')->with("permission_denied", true);
+		}
+
 		$user = User::findOrFail($id);
 		$user_time = UsersTimes::where('user_id',$id);
 
@@ -202,6 +220,9 @@ class UserController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
+		if (!$this->checkPermission(2)) {
+			return Redirect::route('home.dashboard')->with("permission_denied", true);
+		}
 		$user = User::findOrFail($id);
 		$messages = new MessageBag();
 
@@ -230,6 +251,9 @@ class UserController extends \BaseController {
 	 */
 	public function multiple_destroy()
 	{
+		if (!$this->checkPermission(2)) {
+			return Redirect::route('home.dashboard')->with("permission_denied", true);
+		}
 		$ids = Input::get('id');
 		$success = [];
 		$error = [];

@@ -45,6 +45,18 @@ Route::filter('auth', function()
 	}
 });
 
+Route::filter('admin', function()
+{
+	if (Auth::guest() || (Auth::user()->level < 2))
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		return Redirect::route('home.dashboard');
+	}
+});
+
 
 Route::filter('auth.basic', function()
 {
