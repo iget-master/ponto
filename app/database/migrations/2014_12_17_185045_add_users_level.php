@@ -27,7 +27,7 @@ class AddUsersLevel extends Migration {
 	{
 		Schema::table('users', function(Blueprint $table)
 		{
-			$table->drop('level');
+			$table->dropColumn('level');
 		});
 	}
 

@@ -223,5 +223,4 @@ class UserController extends \BaseController {
 		return Redirect::back()->withInput()->with('messages', $messages);
 	}
 
-
 }

@@ -18,9 +18,8 @@ Route::resource('session', 'SessionController', array('only' => array('store')))
 
 /* User resource routes */
 Route::resource('user', "UserController");
+Route::get('/arrival', array('as' => 'timetable.arrival', 'uses' => 'TimetableController@arrival'));
+Route::get('/departure', array('as' => 'timetable.departure', 'uses' => 'TimetableController@departure'));
 
 
-Route::get('/', function()
-{
-	return View::make('dashboard');
-})->before('auth');
+Route::get('/', array('as' => 'home.dashboard', 'uses' => 'HomeController@dashboard'))->before('auth');

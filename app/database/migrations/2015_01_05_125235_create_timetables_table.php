@@ -12,14 +12,14 @@ class CreateTimetablesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('timetable', function(Blueprint $table)
+		Schema::create('timetables', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->unsignedInteger('user_id')->unique();
 			$table->date('date')->unique();
 			$table->time('time_in')->nullable();
 			$table->time('time_out')->nullable();
-			$table->string('justification','255');
+			$table->string('justification','255')->nullable();
 
 		});
 	}
@@ -31,7 +31,7 @@ class CreateTimetablesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('timetable');
+		Schema::drop('timetables');
 	}
 
 }
