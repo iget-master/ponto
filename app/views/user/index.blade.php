@@ -3,7 +3,7 @@
 @section('content')
 	@include('panel.alerts')
 	<div class="table-wrapper">
-		<table class="table table-condensed" >
+		<table id="users_table" class="table table-condensed" >
 			<thead>
 				<th><input type="checkbox"></th>
 				<th>ID</th>
@@ -35,5 +35,11 @@
 
 @section('toolbar')
 	<a href="/user/create" class="btn btn-round primary"><i class="fa fa-plus"></i></a>
-    <a class="btn btn-round btn-sm btn-bulk danger"><i class="fa fa-trash-o"></i></a>
+    {{ Form::open(array('method'=>'DELETE', 'id'=>'delete_users', 'route' => array('user.multiple_destroy'))) }}
+		<button type="submit" class="btn btn-round btn-sm btn-bulk danger"><i class="fa fa-trash-o"></i></button>
+	{{ Form::close() }}
+@stop
+
+@section('script')
+	{{ HTML::script('js/app/users.js') }}
 @stop
