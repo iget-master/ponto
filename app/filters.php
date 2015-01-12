@@ -13,7 +13,7 @@
 
 App::before(function($request)
 {
-	//
+	setlocale(LC_ALL, 'pt_BR');
 });
 
 
