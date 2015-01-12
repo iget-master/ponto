@@ -25,4 +25,11 @@ class UsersTimes extends Eloquent implements UserInterface, RemindableInterface 
 
 	public $timestamps = false;
 
+	static public function getUserTimes($user_id = null) {
+		if (is_null($user_id)) {
+			$user_id = Auth::user()->id;
+		}
+		return UsersTimes::where(['user_id'=>$user_id])->get();
+	}
+
 }

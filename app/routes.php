@@ -18,6 +18,9 @@ Route::resource('session', 'SessionController', array('only' => array('store')))
 
 /* User resource routes */
 Route::resource('user', "UserController");
+Route::delete('/multiple_destroy', array('as' => 'user.multiple_destroy', 'uses' => 'UserController@multiple_destroy'));
+
+
 Route::get('/arrival', array('as' => 'timetable.arrival', 'uses' => 'TimetableController@arrival'));
 Route::get('/departure', array('as' => 'timetable.departure', 'uses' => 'TimetableController@departure'));
 

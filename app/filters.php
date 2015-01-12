@@ -13,7 +13,7 @@
 
 App::before(function($request)
 {
-	//
+	setlocale(LC_ALL, 'pt_BR');
 });
 
 
@@ -42,6 +42,18 @@ Route::filter('auth', function()
 			return Response::make('Unauthorized', 401);
 		}
 		return Redirect::guest('login');
+	}
+});
+
+Route::filter('admin', function()
+{
+	if (Auth::guest() || (Auth::user()->level < 2))
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		return Redirect::route('home.dashboard');
 	}
 });
 

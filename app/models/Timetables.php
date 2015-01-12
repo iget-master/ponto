@@ -32,4 +32,11 @@ class Timetables extends Eloquent implements UserInterface, RemindableInterface 
 		return Timetables::where(['user_id'=>$user_id, 'date'=>date('Y-m-d')])->first();
 	}
 
+	static public function getDay($timestamp, $user_id = null) {
+		if (is_null($user_id)) {
+			$user_id = Auth::user()->id;
+		}
+		return Timetables::where(['user_id'=>$user_id, 'date'=>date('Y-m-d', $timestamp)])->first();
+	}
+
 }

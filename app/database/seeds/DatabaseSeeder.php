@@ -11,6 +11,11 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
+		DB::table('users')->delete();
+		$statement = "ALTER TABLE `users` AUTO_INCREMENT = 1;";
+
+        DB::unprepared($statement);
+
 		User::create([
 				'name'=>'Admin',
 				'surname'=>'Teste',

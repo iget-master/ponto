@@ -17,7 +17,92 @@ class HomeController extends BaseController {
 
 	public function dashboard()
 	{
-		return View::make('dashboard');
+		$timestamp = time();
+		$month = date('m', $timestamp);
+		$year = date('Y', $timestamp);
+		$firstDayOfMonth = strtotime("01-${month}-${year}");
+		$daysToBack = intval(date('w', $firstDayOfMonth));
+		if ($daysToBack == 0) {
+			$daysToBack = 7;
+		}
+		$firstDayOfCalendar = strtotime("-" . $daysToBack . " day", $firstDayOfMonth);
+		//dd($firstDayOfCalendar, $firstDayOfMonth, $daysToBack);
+		$calendar = [];
+
+		$calendar["month_name"] = ucfirst(utf8_encode(strftime("%B", $timestamp)));
+		$calendar["days"][] = ["date"=>$firstDayOfCalendar, "class"=>"disabled"];
+		$calendarDayCount = 1;
+
+		// Varre dias antes do início do mês.
+		for ($i=1; $i < $daysToBack; $i++) { 
+			$calendar["days"][] = ["date"=>strtotime("+${i} day", $firstDayOfCalendar), "class"=>"disabled"];
+			$calendarDayCount++;
+		}
+
+
+		$usertimes = [];
+		foreach (UsersTimes::getUserTimes() as $row) {
+			$usertimes[$row->weekday] = $row;
+		}
+
+
+		// Varre dias do mês atual
+		$dias = 0;
+		$faltas = 0;
+		$atrasos = 0;
+
+		for ($i=0; $i < intval(date('t', $timestamp)); $i++) {
+			$day = strtotime("+${i} day", $firstDayOfMonth);
+			$day_times = Timetables::getDay($day);
+			$class = "";
+
+			$pontual = true;
+			$falta = false;
+
+			if (isset($usertimes[date('w', $day)])) {
+				$weekday_times = $usertimes[date('w', $day)];
+
+				if ($day_times) {
+					if ($day_times->time_in) {
+						if (strtotime($day_times->time_in) > strtotime($weekday_times->time_in)) {
+							$class = "danger";
+							$pontual = false;
+						}
+					} 
+					if ($day_times->time_out) {
+						if (strtotime($day_times->time_out) < strtotime($weekday_times->time_out)) {
+							$class = "danger";
+							$pontual = false;
+						}
+					}
+				} else if ($day < strtotime('tomorrow midnight')) {
+					$class = "danger";
+					$falta = true;
+				}
+
+				if ($day < strtotime('tomorrow midnight')) {
+					$dias++;
+					if ($falta) $faltas++;
+					if (!$pontual) $atrasos++;
+				}
+			}
+			$calendar["days"][] = ["date"=>$day, "class"=>$class, "timetable"=>$day_times];
+			$calendarDayCount++;
+		}
+
+		// Varre dias após o mês atual
+		for ($i=1; $i <= (42 - $calendarDayCount); $i++) {
+			$calendar["days"][] = ["date"=>strtotime("+${i} day", $day), "class"=>"disabled"];
+		}
+
+		$statistics = [];
+
+		$statistics["dias"] = $dias;
+		$statistics["dias_trabalhados"] = $dias - $faltas;
+		$statistics["faltas"] = $faltas;
+		$statistics["atrasos"] = $atrasos;
+
+		return View::make('dashboard')->withCalendar($calendar)->withStatistics($statistics);
 	}
 
 }
