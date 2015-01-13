@@ -102,9 +102,16 @@ class UserController extends \BaseController {
 	}
 
 	public function report($id)
-	{
+	{	
 		return View::make('user/report')->with("id",$id);
 	}
+	public function reportDate($id)
+	{
+		$month = Input::get('month');
+		$year = Input::get('year');
+		return View::make('user/report')->with(array("id"=>$id, "month"=>$month, "year"=>$year));
+	}
+
 
 	/**
 	 * Display the specified resource.

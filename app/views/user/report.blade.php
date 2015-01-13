@@ -4,8 +4,44 @@
 	@include('panel.alerts')
 	<div id="dashboard" class="content-wrapper">
 		<div class="row">
-			<h2>{{ date('M') }} / {{ date('Y') }}</h2>
-		</div>
+			<?php
+				if(!isset($month) && !isset($year)){
+					$m = date('m');
+					$y = date('Y');
+				} else{
+					$m = $month;
+					$y = $year;
+				}
+			?>
+
+			{{ Form::open(array("action"=>array("UserController@report",$id))) }}
+			<div class="form-inline">
+				<div class="form-group">
+					{{ Form::select("month", array(
+						"1" => "Janeiro", 
+						"2" => "Fevereiro", 
+						"3" => "Março", 
+						"4" => "Abril", 
+						"5" => "Maio", 
+						"6" => "Junho", 
+						"7" => "Julho", 
+						"8" => "Agosto", 
+						"9" => "Setembro", 
+						"10" => "Outubro", 
+						"11" => "Novembro", 
+						"12" => "Dezembro" 
+						), $m ,array("class" => "form-control", "style"=>"font-size:16px;"))
+					}}
+				</div>
+				<div class="form-group">
+					{{ Form::selectYear("year", date('Y'), 2010, $y , array("class"=>"form-control", "style"=>"font-size:16px;")) }}
+				</div>
+				<div class="form-group">
+					{{ Form::submit("Gerenciar",array("class"=>"btn btn-primary")) }}
+				</div>
+			</div>
+			{{ Form::close() }}
+		</div><hr />
 		<div class="row">
 			<table id="report_table" class="table table-condensed" >
 				<thead>
@@ -15,12 +51,14 @@
 				</thead>
 				<tbody>
 				<?php
-					$month = date('m');
-					$current_year = date('Y');
+					if(!isset($month) && !isset($year)){
+						$month = date('m');
+						$year = date('Y');
+					}
 				?>
 			@for ($i=1;$i<32;$i++)
 				<?php 
-					$timestamp = strtotime("${current_year}-${month}-${i}");
+					$timestamp = strtotime("${year}-${month}-${i}");
 					$time = Timetables::getDay($timestamp,$id);
 						if(!is_null($time)){
 							$time_in = substr($time->time_in, 0, -3);

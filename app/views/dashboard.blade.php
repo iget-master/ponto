@@ -236,7 +236,6 @@
 				</script>
 			</div>
 		</div>
-
 	</div>
 @stop
 
