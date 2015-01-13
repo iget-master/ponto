@@ -50,7 +50,7 @@
 				</div>
 				<div class="block-row clearfix">
 					<div class="block">
-						<p class="title">{{ round(($statistics["dias_trabalhados"] / $statistics["dias"]) * 100) }}% </p>
+						<p class="title">{{ $statistics["presenca"] }}% </p>
 						<p class="subtitle">Presença</p>
 					</div>
 					<!-- <div class="block">
