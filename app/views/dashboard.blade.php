@@ -44,7 +44,7 @@
 						<p class="subtitle">Atrasos</p>
 					</div>
 					<div class="block">
-						<p class="title">{{ round((1 - ($statistics["atrasos"]) / $statistics["dias_trabalhados"]) * 100) }}%</p>
+						<p class="title">{{ $statistics["pontualidade"] }}%</p>
 						<p class="subtitle">Pontualidade</p>
 					</div>
 				</div>
