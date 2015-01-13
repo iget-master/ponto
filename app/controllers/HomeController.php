@@ -101,6 +101,17 @@ class HomeController extends BaseController {
 		$statistics["dias_trabalhados"] = $dias - $faltas;
 		$statistics["faltas"] = $faltas;
 		$statistics["atrasos"] = $atrasos;
+		if ($statistics["dias_trabalhados"] == 0) {
+			$statistics["pontualidade"] = "-";
+		} else {
+			$statistics["pontualidade"] = round((1 - ($statistics["atrasos"]) / $statistics["dias_trabalhados"]) * 100);
+		}
+
+		if ($statistics["dias"] == 0) {
+			$statistics["presenca"] = "-";
+		} else {
+			$statistics["presenca"] = round(($statistics["dias_trabalhados"] / $statistics["dias"]) * 100);
+		}
 
 		return View::make('dashboard')->withCalendar($calendar)->withStatistics($statistics);
 	}
