@@ -181,7 +181,6 @@
 					    var timeOut_m = {{$timeOut_m}};
 					    var timeOut_h = {{$timeOut_h}};
 						
-				        
 				        c2d.strokeStyle="#000";
 				        
 				        c2d.lineWidth=6;
@@ -214,25 +213,36 @@
 		        		c2d.stroke();
 		        		c2d.restore();
 
-				      	
-				        
 				        //Additional restore to go back to state before translate
 				        //Alternative would be to simply reverse the original translate
 				        c2d.restore();
 				        setTimeout(draw,1000);
 
-				        var context=canvas.getContext('2d');
-				        context.moveTo(150,150);
-				        context.lineTo(150,150);
-				        context.arc(150,150,135,(Math.PI/6*(timeIn_h+(timeIn_m/60)+(timeIn_s/3600))) - 1.57, (Math.PI/6*(timeOut_h+(timeOut_m/60)+(timeOut_s/3600))) - 1.57);
-				        context.lineWidth = 5;
-				        context.strokeStyle = "rgba(0,0,200,0.2)";
-				        // context.strokeStyle = '#ff0000';
-				        context.stroke();
-				        context.fillStyle = "rgba(0, 0, 200, 0.5)";
-				        context.fill();
+				        var timeCondition = hrs - timeIn_h;
+				        if(timeCondition >= "12"){
+				          	var context=canvas.getContext('2d');
+					        context.moveTo(150,150);
+					        context.lineTo(150,150);
+					        context.arc(150,150,135, (Math.PI/6*(timeIn_h+(timeIn_m/60)+(timeIn_s/3600))) - 1.57, ((Math.PI/6*(timeOut_h+(timeOut_m/60)+(timeOut_s/3600))) - 1.57) * 3);
+					        context.lineWidth = 5;
+					        context.strokeStyle = "rgba(0,0,0,0)";
+					        context.stroke();
+					        context.fillStyle = "rgba(0, 0, 200, 0.2)";
+					        context.fill();
+				    	}
 
-				  	}	   
+				        var context2=canvas.getContext('2d');
+				        context2.beginPath();
+				        context2.moveTo(150,150);
+				        context2.lineTo(150,150);
+				        context2.arc(150,150,135, (Math.PI/6*(timeIn_h+(timeIn_m/60)+(timeIn_s/3600))) - 1.57, (Math.PI/6*(timeOut_h+(timeOut_m/60)+(timeOut_s/3600))) - 1.57);
+				        context2.lineWidth = 5;
+				        context2.strokeStyle = "rgba(100,0,200,0.2)";
+				        context2.stroke();
+				        context2.fillStyle = "rgba(100, 0, 200, 0.4)";
+				        context2.fill();
+
+				  	}
 				</script>
 			</div>
 		</div>
