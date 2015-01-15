@@ -96,83 +96,12 @@
 				<script type="application/x-javascript">
 					draw();
 				    function draw() {
-
-				      	var canvas = document.getElementById('example');
-				        var c2d=canvas.getContext('2d');
-						c2d.moveTo(150,150);
-						c2d.arc(150,150,120,0,90);
-						c2d.lineTo(150,150);
-						c2d.stroke();
-
-						c2d.clearRect(0,0,300,300);
-				        //Define gradients for 3D / shadow effect
-				        var grad1=c2d.createLinearGradient(0,0,300,300);
-				        grad1.addColorStop(0,"#D83040");
-				        grad1.addColorStop(1,"#801020");
-				        var grad2=c2d.createLinearGradient(0,0,300,300);
-				        grad2.addColorStop(0,"#801020");
-				        grad2.addColorStop(1,"#D83040");
-				        c2d.font="Bold 20px Arial";
-				        c2d.textBaseline="middle";
-				        c2d.textAlign="center";
-				        c2d.lineWidth=1;
-				        c2d.save();
-				        //Outer bezel
-				        c2d.strokeStyle=grad1;
-				        c2d.lineWidth=10;
-				        c2d.beginPath();
-				        c2d.arc(150,150,138,0,Math.PI*2,true);
-				        c2d.shadowOffsetX=4;
-				        c2d.shadowOffsetY=4;
-				        c2d.shadowColor="rgba(0,0,0,0.6)";
-				        c2d.shadowBlur=6;
-				        c2d.stroke();
-				        //Inner bezel
-				        c2d.restore();
-				        c2d.strokeStyle=grad2;
-				        c2d.lineWidth=10;
-				        c2d.beginPath();
-				        c2d.arc(150,150,129,0,Math.PI*2,true);
-				        c2d.stroke();
-				        c2d.strokeStyle="#222";
-				        c2d.save();
-				        c2d.translate(150,150);
-				        //Markings/Numerals
-				        for (i=1;i<=60;i++) {
-				          ang=Math.PI/30*i;
-				          sang=Math.sin(ang);
-				          cang=Math.cos(ang);
-				          //If modulus of divide by 5 is zero then draw an hour marker/numeral
-				          if (i % 5 == 0) {
-				            c2d.lineWidth=8;
-				            sx=sang*95;
-				            sy=cang*-95;
-				            ex=sang*120;
-				            ey=cang*-120;
-				            nx=sang*80;
-				            ny=cang*-80;
-				            //writes the numbers
-				            c2d.fillStyle = "rgb(0, 0, 0)";
-				            c2d.fillText(i/5,nx,ny);
-				          //Else this is a minute marker
-				          } else {
-				            c2d.lineWidth=2;
-				            sx=sang*110;
-				            sy=cang*110;
-				            ex=sang*120;
-				            ey=cang*120;
-				          }
-				          c2d.beginPath();
-				          c2d.moveTo(sx,sy);
-				          c2d.lineTo(ex,ey);
-				          c2d.stroke();
-				        }
 				        //Fetch the current time
 				        var now=new Date();
 				        var hrs=now.getHours();
 				        var min=now.getMinutes();
 				        var sec=now.getSeconds();
-				        
+
 				        var timeIn_s = {{$timeIn_s}};
 					    var timeIn_m = {{$timeIn_m}};
 					    var timeIn_h = {{$timeIn_h}};
@@ -181,7 +110,10 @@
 					    var timeOut_m = {{$timeOut_m}};
 					    var timeOut_h = {{$timeOut_h}};
 
-			        	if((timeIn_h < 12) && ((timeOut_h - timeIn_h) >= 12)){
+					    var angleIn = (Math.PI/6*(timeIn_h+(timeIn_m/60)+(timeIn_s/3600))) - 1.57;
+				        var angleOut = (Math.PI/6*(timeOut_h+(timeOut_m/60)+(timeOut_s/3600))) - 1.57;
+
+					    if((timeIn_h < 12) && ((timeOut_h - timeIn_h) >= 12)){
 				        	var invert = true;
 				        } else if((timeIn_h >= 12) && (((timeOut_h + 12) - (timeIn_h - 12)) > 12) && (((timeOut_h + 12) - (timeIn_h - 12)) < 24)){
 				        	var invert = true;
@@ -199,10 +131,93 @@
 				        	var workedHours = 12;
 				        }
 
+				        if(timeOut_h > 12){
+				        	timeOut_h -= 12;
+				        }
 
+				      	var canvas = document.getElementById('example');
+				        var c2d=canvas.getContext('2d');
+						c2d.moveTo(150,150);
+						c2d.arc(150,150,120,0,90);
+						c2d.lineTo(150,150);
+						c2d.stroke();
+
+						c2d.clearRect(0,0,300,300);
+
+
+				        c2d.font="Bold 20px Arial";
+				        c2d.textBaseline="middle";
+				        c2d.textAlign="center";
+				        c2d.lineWidth=1;
+				        c2d.save();
+				        //Inner bezel
+				        c2d.restore();
+				        c2d.strokeStyle="#263238";
+				        c2d.lineWidth=5;
+				        c2d.beginPath();
+				        c2d.arc(150,150,129,0,Math.PI*2,true);
+				        c2d.stroke();
+				        c2d.strokeStyle="#546E7A";
+				        c2d.save();
+
+
+				        if (angleIn !== angleOut) {
+
+					        c2d.moveTo(150,150);
+					        c2d.lineTo(150,150);
+
+
+					        console.log(timeOut_h, timeOut_m, timeOut_s);
+					        console.log(timeIn_h, timeIn_m, timeIn_s);
+
+					        c2d.arc(150,150,127, angleOut, angleIn);
+
+					        c2d.fillStyle = "rgba(0, 0, 200, 0.6)";
+					        c2d.fill();
+				        }
+
+				        if(workedHours == 12){
+					        c2d.moveTo(150,150);
+					        c2d.lineTo(150,150);
+					        c2d.arc(150,150,127, Math.PI, Math.PI * 3);
+					        c2d.fillStyle = "rgba(0, 0, 200, 0.4)";
+					        c2d.fill();
+				    	}
+
+				        c2d.translate(150,150);
+				        c2d.strokeStyle="#222";
+				        //Markings/Numerals
+				        for (i=1;i<=60;i++) {
+				          ang=Math.PI/30*i;
+				          sang=Math.sin(ang);
+				          cang=Math.cos(ang);
+				          //If modulus of divide by 5 is zero then draw an hour marker/numeral
+				          if (i % 5 == 0) {
+				            c2d.lineWidth=2;
+				            sx=sang*95;
+				            sy=cang*-95;
+				            ex=sang*120;
+				            ey=cang*-120;
+				            nx=sang*80;
+				            ny=cang*-80;
+				            //writes the numbers
+				            //c2d.fillStyle = "rgb(0, 0, 0)";
+				            //c2d.fillText(i/5,nx,ny);
+				          //Else this is a minute marker
+				          } else {
+				            c2d.lineWidth=1;
+				            sx=sang*110;
+				            sy=cang*110;
+				            ex=sang*120;
+				            ey=cang*120;
+				          }
+				          c2d.beginPath();
+				          c2d.moveTo(sx,sy);
+				          c2d.lineTo(ex,ey);
+				          c2d.stroke();
+				        }
 						
 				        c2d.strokeStyle="#000";
-				        
 				        c2d.lineWidth=6;
 				        c2d.save();
 				        //Draw clock pointers but this time rotate the canvas rather than
@@ -215,22 +230,14 @@
 				        c2d.lineTo(0,-60);
 				        c2d.stroke();
 				        c2d.restore();
+				        c2d.lineWidth=4;
 				        c2d.save();
 				        //Draw minute hand
 				        c2d.rotate(Math.PI/30*(min+(sec/60)));
 				        c2d.beginPath();
 				        c2d.moveTo(0,20);
-				        c2d.lineTo(0,-110);
+				        c2d.lineTo(0,-100);
 				        c2d.stroke();
-				        c2d.restore();
-				        c2d.save();
-				        //Draw second hand
-		        		c2d.rotate(Math.PI/30*sec);
-		        		c2d.strokeStyle="#E33";
-		        		c2d.beginPath();
-		        		c2d.moveTo(0,20);
-		        		c2d.lineTo(0,-110);
-		        		c2d.stroke();
 		        		c2d.restore();
 
 				        //Additional restore to go back to state before translate
@@ -238,28 +245,31 @@
 				        c2d.restore();
 				        setTimeout(draw,1000);
 
-				        var context2=canvas.getContext('2d');
-				        context2.moveTo(150,150);
-				        context2.lineTo(150,150);
-						context2.arc(150,150,135, (Math.PI/6*(timeIn_h+(timeIn_m/60)+(timeIn_s/3600))) - 1.57, (Math.PI/6*(timeOut_h+(timeOut_m/60)+(timeOut_s/3600))) - 1.57);
-				        context2.lineWidth = 5;
-				        context2.strokeStyle = "rgba(100,0,200,0.2)";
-				        context2.stroke();
-				        context2.fillStyle = "rgba(100, 0, 200, 0.2)";
-				        context2.fill();
+// <<<<<<< HEAD
+// =======
+// 				        var context2=canvas.getContext('2d');
+// 				        context2.moveTo(150,150);
+// 				        context2.lineTo(150,150);
+// 						context2.arc(150,150,135, (Math.PI/6*(timeIn_h+(timeIn_m/60)+(timeIn_s/3600))) - 1.57, (Math.PI/6*(timeOut_h+(timeOut_m/60)+(timeOut_s/3600))) - 1.57);
+// 				        context2.lineWidth = 5;
+// 				        context2.strokeStyle = "rgba(100,0,200,0.2)";
+// 				        context2.stroke();
+// 				        context2.fillStyle = "rgba(100, 0, 200, 0.2)";
+// 				        context2.fill();
 
-				        if(workedHours == 12){
-				          	var context=canvas.getContext('2d');
-				          	context.beginPath();
-					        context.moveTo(150,150);
-					        context.lineTo(150,150);
-					        context.arc(150,150,135, Math.PI, Math.PI * 3);
-					        context.lineWidth = 5;
-					        context.strokeStyle = "rgba(0,0,0,0)";
-					        context.stroke();
-					        context.fillStyle = "rgba(0, 0, 200, 0.2)";
-					        context.fill();
-				    	}
+// 				        if(workedHours == 12){
+// 				          	var context=canvas.getContext('2d');
+// 				          	context.beginPath();
+// 					        context.moveTo(150,150);
+// 					        context.lineTo(150,150);
+// 					        context.arc(150,150,135, Math.PI, Math.PI * 3);
+// 					        context.lineWidth = 5;
+// 					        context.strokeStyle = "rgba(0,0,0,0)";
+// 					        context.stroke();
+// 					        context.fillStyle = "rgba(0, 0, 200, 0.2)";
+// 					        context.fill();
+// 				    	}
+// >>>>>>> master
 
 				  	}
 				</script>
