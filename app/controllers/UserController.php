@@ -101,6 +101,17 @@ class UserController extends \BaseController {
 		return Redirect::route('user.index');
 	}
 
+	public function report($id)
+	{	
+		return View::make('user/report')->with("id",$id);
+	}
+	public function reportDate($id)
+	{
+		$month = Input::get('month');
+		$year = Input::get('year');
+		return View::make('user/report')->with(array("id"=>$id, "month"=>$month, "year"=>$year));
+	}
+
 
 	/**
 	 * Display the specified resource.
@@ -135,6 +146,10 @@ class UserController extends \BaseController {
 
 	}
 
+	public function reports($id)
+	{
+		return Redirect::to('user/reports');
+	}
 
 	/**
 	 * Update the specified resource in storage.
