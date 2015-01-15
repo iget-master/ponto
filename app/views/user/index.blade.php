@@ -18,6 +18,9 @@
 					<td>{{ $user->id }}</td>
 					<td>{{ $user->name }}</td>
 					<td>{{ $user->email }}</td>
+					<td class="actions" style="width:100px">
+						{{ link_to_route('user.report', 'Relatórios', [$user->id], ['role'=>'reports']) }}
+					</td>
 					<td class="actions">
 						{{ link_to_route('user.edit', 'Modificar', [$user->id], ['role'=>'edit']) }}
 					</td>

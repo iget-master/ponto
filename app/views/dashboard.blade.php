@@ -110,8 +110,30 @@
 					    var timeOut_m = {{$timeOut_m}};
 					    var timeOut_h = {{$timeOut_h}};
 
-					    console.log(timeIn_s, timeIn_m ,timeIn_h);
-					    console.log(timeOut_s, timeOut_m ,timeOut_h);
+					    var angleIn = (Math.PI/6*(timeIn_h+(timeIn_m/60)+(timeIn_s/3600))) - 1.57;
+				        var angleOut = (Math.PI/6*(timeOut_h+(timeOut_m/60)+(timeOut_s/3600))) - 1.57;
+
+					    if((timeIn_h < 12) && ((timeOut_h - timeIn_h) >= 12)){
+				        	var invert = true;
+				        } else if((timeIn_h >= 12) && (((timeOut_h + 12) - (timeIn_h - 12)) > 12) && (((timeOut_h + 12) - (timeIn_h - 12)) < 24)){
+				        	var invert = true;
+				        } else{
+				        	var invert = false;
+				        }
+				        if(hrs > 12){
+				        	hrs -= 12;
+				        }
+
+				        //tem que mecher com os minutos também
+				        //$workwdHours pode ser 0 ou 12.
+				        var workedHours = 0;
+			        	if(invert == true){
+				        	var workedHours = 12;
+				        }
+
+				        if(timeOut_h > 12){
+				        	timeOut_h -= 12;
+				        }
 
 				      	var canvas = document.getElementById('example');
 				        var c2d=canvas.getContext('2d');
@@ -138,19 +160,32 @@
 				        c2d.strokeStyle="#546E7A";
 				        c2d.save();
 
-				        c2d.moveTo(150,150);
-				        c2d.lineTo(150,150);
+
+				        if (angleIn !== angleOut) {
+
+					        c2d.moveTo(150,150);
+					        c2d.lineTo(150,150);
 
 
-				        var angleIn = (Math.PI/6*(timeIn_h+(timeIn_m/60)+(timeIn_s/3600))) - 1.57;
-				        var angleOut = (Math.PI/6*(timeOut_h+(timeOut_m/60)+(timeOut_s/3600))) - 1.57;
+					        console.log(timeOut_h, timeOut_m, timeOut_s);
+					        console.log(timeIn_h, timeIn_m, timeIn_s);
 
-				        c2d.arc(150,150,127, angleOut, angleIn);
-				        
-				        c2d.fillStyle = "rgba(0, 0, 200, 0.5)";
-				        c2d.fill();
+					        c2d.arc(150,150,127, angleOut, angleIn);
+
+					        c2d.fillStyle = "rgba(0, 0, 200, 0.6)";
+					        c2d.fill();
+				        }
+
+				        if(workedHours == 12){
+					        c2d.moveTo(150,150);
+					        c2d.lineTo(150,150);
+					        c2d.arc(150,150,127, Math.PI, Math.PI * 3);
+					        c2d.fillStyle = "rgba(0, 0, 200, 0.4)";
+					        c2d.fill();
+				    	}
 
 				        c2d.translate(150,150);
+				        c2d.strokeStyle="#222";
 				        //Markings/Numerals
 				        for (i=1;i<=60;i++) {
 				          ang=Math.PI/30*i;
@@ -181,9 +216,7 @@
 				          c2d.lineTo(ex,ey);
 				          c2d.stroke();
 				        }
-
 						
-				        
 				        c2d.strokeStyle="#000";
 				        c2d.lineWidth=6;
 				        c2d.save();
@@ -207,19 +240,41 @@
 				        c2d.stroke();
 		        		c2d.restore();
 
-				      	
-				        
 				        //Additional restore to go back to state before translate
 				        //Alternative would be to simply reverse the original translate
 				        c2d.restore();
 				        setTimeout(draw,1000);
 
+// <<<<<<< HEAD
+// =======
+// 				        var context2=canvas.getContext('2d');
+// 				        context2.moveTo(150,150);
+// 				        context2.lineTo(150,150);
+// 						context2.arc(150,150,135, (Math.PI/6*(timeIn_h+(timeIn_m/60)+(timeIn_s/3600))) - 1.57, (Math.PI/6*(timeOut_h+(timeOut_m/60)+(timeOut_s/3600))) - 1.57);
+// 				        context2.lineWidth = 5;
+// 				        context2.strokeStyle = "rgba(100,0,200,0.2)";
+// 				        context2.stroke();
+// 				        context2.fillStyle = "rgba(100, 0, 200, 0.2)";
+// 				        context2.fill();
 
-				  	}	   
+// 				        if(workedHours == 12){
+// 				          	var context=canvas.getContext('2d');
+// 				          	context.beginPath();
+// 					        context.moveTo(150,150);
+// 					        context.lineTo(150,150);
+// 					        context.arc(150,150,135, Math.PI, Math.PI * 3);
+// 					        context.lineWidth = 5;
+// 					        context.strokeStyle = "rgba(0,0,0,0)";
+// 					        context.stroke();
+// 					        context.fillStyle = "rgba(0, 0, 200, 0.2)";
+// 					        context.fill();
+// 				    	}
+// >>>>>>> master
+
+				  	}
 				</script>
 			</div>
 		</div>
-
 	</div>
 @stop
 
