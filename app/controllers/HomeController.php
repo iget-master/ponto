@@ -69,13 +69,13 @@ class HomeController extends BaseController {
 				if ($day_times) {
 					if ($day_times->time_in) {
 						if (strtotime($day_times->time_in) > strtotime($weekday_times->time_in)) {
-							$class = "danger";
+							$class = "success";
 							$pontual = false;
 						}
 					} 
 					if ($day_times->time_out) {
 						if (strtotime($day_times->time_out) < strtotime($weekday_times->time_out)) {
-							$class = "danger";
+							$class = "success";
 							$pontual = false;
 						}
 					}
