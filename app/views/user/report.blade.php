@@ -85,13 +85,6 @@
 	Relatórios
 @stop
 
-@section('toolbar')
-	<a href="/user/create" class="btn btn-round primary"><i class="fa fa-plus"></i></a>
-    {{ Form::open(array('method'=>'DELETE', 'id'=>'delete_users', 'route' => array('user.multiple_destroy'))) }}
-		<button type="submit" class="btn btn-round btn-sm btn-bulk danger"><i class="fa fa-trash-o"></i></button>
-	{{ Form::close() }}
-@stop
-
 @section('script')
 	{{ HTML::script('js/app/users.js') }}
 @stop
