@@ -50,11 +50,19 @@ class HomeController extends BaseController {
 		$dias = 0;
 		$faltas = 0;
 		$atrasos = 0;
+		$horasTrabalhadas = 0;
 
 		for ($i=0; $i < intval(date('t', $timestamp)); $i++) {
 			$day = strtotime("+${i} day", $firstDayOfMonth);
 			$day_times = Timetables::getDay($day);
 			$class = "";
+
+			if($day_times){
+				if($day_times->time_out != null){
+					$worked = substr($day_times->time_out,0,-6) - substr($day_times->time_in,0,-6);
+					$horasTrabalhadas += $worked;
+				}
+			}
 
 			$pontual = true;
 			$falta = false;
@@ -88,6 +96,8 @@ class HomeController extends BaseController {
 			}
 			$calendar["days"][] = ["date"=>$day, "class"=>$class, "timetable"=>$day_times];
 			$calendarDayCount++;
+
+
 		}
 
 		// Varre dias após o mês atual
@@ -101,6 +111,7 @@ class HomeController extends BaseController {
 		$statistics["dias_trabalhados"] = $dias - $faltas;
 		$statistics["faltas"] = $faltas;
 		$statistics["atrasos"] = $atrasos;
+		$statistics["horasTrabalhadas"] = $horasTrabalhadas;
 		if ($statistics["dias_trabalhados"] == 0) {
 			$statistics["pontualidade"] = "-";
 		} else {
