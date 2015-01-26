@@ -22,8 +22,11 @@ Route::delete('/multiple_destroy', array('as' => 'user.multiple_destroy', 'uses'
 Route::get('/user/report/{user_id}', array('as' => 'user.report', 'uses' => 'UserController@report'));
 Route::post('/user/report/{user_id}', array('as' => 'user.report', 'uses' => 'UserController@reportDate'));
 
+/* Timetable routes */
 Route::get('/arrival', array('as' => 'timetable.arrival', 'uses' => 'TimetableController@arrival'));
 Route::get('/departure', array('as' => 'timetable.departure', 'uses' => 'TimetableController@departure'));
 
+/* Report controller route */
+Route::resource("report","ReportController");
 
 Route::get('/', array('as' => 'home.dashboard', 'uses' => 'HomeController@dashboard'))->before('auth');

@@ -48,6 +48,7 @@
 					<th id="report_day">Dia</th>
 					<th id="report_time_in">Hora de Entrada</th>
 					<th id="report_time_out">Hora de Saída</th>
+					<th>&nbsp;</th>
 				</thead>
 				<tbody>
 				<?php
@@ -57,7 +58,10 @@
 					}
 				?>
 			@for ($i=1;$i<32;$i++)
-				<?php 
+				<?php
+					if($i < 10){
+						$i = "0${i}";
+					}
 					$timestamp = strtotime("${year}-${month}-${i}");
 					$time = Timetables::getDay($timestamp,$id);
 						if(!is_null($time)){
@@ -72,6 +76,9 @@
 					<td>{{ $i }}</td>
 					<td>{{ $time_in }}</td>
 					<td>{{ $time_out }}</td>
+					<td>
+						{{ link_to_route('report.edit', 'Alterar', ["day"=>"${year}-${month}-${i}","id"=>$id], ['role'=>'edit']) }}
+					</td>
 				</tr>
 			@endfor
 				</tbody>
