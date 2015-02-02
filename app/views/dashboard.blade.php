@@ -53,10 +53,10 @@
 						<p class="title">{{ $statistics["presenca"] }}% </p>
 						<p class="subtitle">Presença</p>
 					</div>
-					<!-- <div class="block">
-						<p class="title">3</p>
-						<p class="subtitle">Faltas</p>
-					</div> -->
+					<div class="block">
+						<p class="title">{{ $statistics["horasTrabalhadas"] }}</p>
+						<p class="subtitle">Horas Trabalhadas</p>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4" align="center">
